@@ -36,7 +36,7 @@ export default defineConfig({
               items: [{ text: "01. First Post", link: "/posts/first-post" }],
             },
           ],
-          "/": []
+          "/": [],
         },
       },
     },
@@ -46,7 +46,10 @@ export default defineConfig({
       lang: "zh-CN",
       link: "/zh/",
       themeConfig: {
-        nav: [{ text: "文章", link: "/zh/posts/first-post" }],
+        nav: [
+          { text: "文章", link: "/zh/posts/first-post" },
+          { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
+        ],
         sidebar: {
           "/zh/posts/": [
             {
@@ -54,7 +57,7 @@ export default defineConfig({
               items: [{ text: "01. 第一篇文章", link: "/zh/posts/first-post" }],
             },
           ],
-          "/zh/": []
+          "/zh/": [],
         },
       },
     },
