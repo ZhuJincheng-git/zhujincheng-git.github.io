@@ -25,7 +25,6 @@ features:
     details: "The Pursuit of Better Questions."
 ---
 
-
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -47,11 +46,11 @@ let initTimer = null
 
 function rotateQuote() {
   phase.value = 'leave'
-  
+
   // Dynamically calculate leave duration
   // Max leave animation delay: (length * 0.03s) + animation duration 0.8s
   const leaveDuration = (currentQuote.value.length * 30) + 800 + 200 // +200ms safety margin
-  
+
   leaveTimer = setTimeout(function() {
     phase.value = 'hidden'
     
@@ -65,7 +64,7 @@ function rotateQuote() {
     enterTimer = setTimeout(function() {
       phase.value = 'enter'
     }, 300) 
-    
+
   }, leaveDuration) 
 }
 
@@ -73,7 +72,7 @@ onMounted(function() {
   initTimer = setTimeout(function() {
     phase.value = 'enter'
   }, 500)
-  
+
   // Set interval long enough, or start next loop inside rotateQuote
   function startLoop() {
     clockTimer = setTimeout(function() {
