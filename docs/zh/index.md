@@ -26,63 +26,71 @@ features:
 ---
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const quotes = [
-  "不要急着学习有用的东西，先看看什么愚蠢的问题还没有解决",
-  "代码跑不通？不会放弃，会debug",
+  "不要急着学习有用的东西，先看看什么愚蠢的问题还没有解决。",
+  "代码跑不通？不会放弃，会debug。",
   "信息是行动的副产品，不是行动的前提。",
-  "判断力，是把正确的信息放到正确的地方的能力",
+  "判断力，是把正确的信息放到正确的地方的能力。",
   "把风险当成\"做事的成本\"，你会评估值不值，而不是敢不敢。"
-];
+]
 
-const currentQuote = ref(quotes[0]);
-const phase = ref('hidden');
+const currentQuote = ref(quotes[0])
+const phase = ref('hidden') 
 
-// 显式声明所有定时器句柄
-let clockTimer = null;
-let leaveTimer = null;
-let enterTimer = null;
-let initTimer = null;
+let clockTimer = null
+let leaveTimer = null
+let enterTimer = null
+let initTimer = null
 
 function rotateQuote() {
-  phase.value = 'leave';
+  phase.value = 'leave'
   
-  // 记录离场定时器
+  // Dynamically calculate leave duration
+  // Max leave animation delay: (length * 0.03s) + animation duration 0.8s
+  const leaveDuration = (currentQuote.value.length * 30) + 800 + 200 // +200ms safety margin
+  
   leaveTimer = setTimeout(function() {
-    phase.value = 'hidden';
+    phase.value = 'hidden'
     
-    let nextQuote = currentQuote.value;
+    let nextQuote = currentQuote.value
     while (nextQuote === currentQuote.value) {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      nextQuote = quotes[randomIndex];
+      nextQuote = quotes[Math.floor(Math.random() * quotes.length)]
     }
-    currentQuote.value = nextQuote;
+    currentQuote.value = nextQuote
     
-    // 记录入场定时器
+    // Force wait 300ms for stage to clear before entering
     enterTimer = setTimeout(function() {
-      phase.value = 'enter';
-    }, 150);
+      phase.value = 'enter'
+    }, 300) 
     
-  }, 2200);
+  }, leaveDuration) 
 }
 
 onMounted(function() {
-  // 记录初始化定时器
   initTimer = setTimeout(function() {
-    phase.value = 'enter';
-  }, 100);
+    phase.value = 'enter'
+  }, 500)
   
-  clockTimer = setInterval(rotateQuote, 10000);
-});
+  // Set interval long enough, or start next loop inside rotateQuote
+  function startLoop() {
+    clockTimer = setTimeout(function() {
+      rotateQuote()
+      // Wait for leaveDuration + enter wait 300ms + display time 5000ms
+      // Simplified handling to avoid overlap
+      setTimeout(startLoop, 10000)
+    }, 8000)
+  }
+  startLoop()
+})
 
-// 清理
 onUnmounted(function() {
-  if (clockTimer) clearInterval(clockTimer);
-  if (leaveTimer) clearTimeout(leaveTimer);
-  if (enterTimer) clearTimeout(enterTimer);
-  if (initTimer) clearTimeout(initTimer);
-});
+  clearTimeout(clockTimer)
+  clearTimeout(leaveTimer)
+  clearTimeout(enterTimer)
+  clearTimeout(initTimer)
+})
 </script>
 
 <div class="breathing-quote-stage">
