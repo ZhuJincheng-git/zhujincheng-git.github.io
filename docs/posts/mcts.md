@@ -1,3 +1,14 @@
+---
+layout: doc
+title: Monte Carlo Tree Search 
+date: 2025-12-31
+tags:
+  - AI
+  - Reinforcement-Learning
+---
+
+
+
 # Monte Carlo Tree Search (MCTS)
 
 A decision algorithm suitable for planning in combinatorial game actions. It is essentially a heuristic search method.

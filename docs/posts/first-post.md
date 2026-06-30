@@ -1,3 +1,13 @@
+---
+layout: doc
+title: Abstraction, Structure, Operator
+date: 2026-6-30
+tags:
+  - Other
+---
+
+
+
 # Abstraction, Structure, Operator
 
 This is a test article.
