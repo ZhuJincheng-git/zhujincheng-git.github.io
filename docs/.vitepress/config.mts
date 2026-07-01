@@ -36,6 +36,7 @@ export default defineConfig({
               items: [
                 { text: "First Post", link: "/posts/first-post" },
                 { text: "MCTS", link: "/posts/mcts" },
+                { text: "The Great Failure", link: "/posts/the_great_failure" },
               ],
             },
           ],
@@ -60,6 +61,10 @@ export default defineConfig({
               items: [
                 { text: "第一篇文章", link: "/zh/posts/first-post" },
                 { text: "蒙特卡洛树搜索", link: "/zh/posts/mcts" },
+                {
+                  text: "大失败",
+                  link: "/zh/posts/the_great_failure",
+                },
               ],
             },
           ],
