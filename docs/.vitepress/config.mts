@@ -26,7 +26,7 @@ export default defineConfig({
       lang: "en",
       themeConfig: {
         nav: [
-          { text: "Blog", link: "/posts/first-post" },
+          { text: "Blog", link: "/posts/2026-06-30-first-post" },
           { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
         ],
         sidebar: {
@@ -34,10 +34,13 @@ export default defineConfig({
             {
               text: "Blog",
               items: [
-                { text: "First Post", link: "/posts/first-post" },
-                { text: "MCTS", link: "/posts/mcts" },
-                { text: "The Great Failure", link: "/posts/the_great_failure" },
-                { text: "About AI", link: "/posts/about-ai" },
+                { text: "First Post", link: "/posts/2026-06-30-first-post" },
+                { text: "MCTS", link: "/posts/2025-12-31-mcts" },
+                {
+                  text: "The Great Failure",
+                  link: "/posts/2026-07-01-the-great-failure",
+                },
+                { text: "About AI", link: "/posts/2026-07-02-about-ai" },
               ],
             },
           ],
@@ -52,7 +55,7 @@ export default defineConfig({
       link: "/zh/",
       themeConfig: {
         nav: [
-          { text: "文章", link: "/zh/posts/first-post" },
+          { text: "文章", link: "/zh/posts/2026-06-30-first-post" },
           { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
         ],
         sidebar: {
@@ -60,13 +63,13 @@ export default defineConfig({
             {
               text: "文章",
               items: [
-                { text: "第一篇文章", link: "/zh/posts/first-post" },
-                { text: "蒙特卡洛树搜索", link: "/zh/posts/mcts" },
+                { text: "第一篇文章", link: "/zh/posts/2026-06-30-first-post" },
+                { text: "蒙特卡洛树搜索", link: "/zh/posts/2025-12-31-mcts" },
                 {
                   text: "大失败",
-                  link: "/zh/posts/the_great_failure",
+                  link: "/zh/posts/2026-07-01-the-great-failure",
                 },
-                { text: "关于人工智能", link: "/zh/posts/about-ai" },
+                { text: "关于人工智能", link: "/zh/posts/2026-07-02-about-ai" },
               ],
             },
           ],

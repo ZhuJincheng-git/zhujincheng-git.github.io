@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Explore
-      link: /posts/first-post
+      link: /posts/2026-06-30-first-post
     - theme: alt
       text: GitHub
       link: https://github.com/ZhuJincheng-git/

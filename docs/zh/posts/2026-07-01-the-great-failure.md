@@ -1,10 +1,10 @@
 ---
 layout: doc
-title: The Great Failure
+title: 大失败
 date: 2026/7/1
 tags:
   - Beta
-  - System
+  - 系统
 ---
 
 
