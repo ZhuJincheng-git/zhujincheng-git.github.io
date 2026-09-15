@@ -41,6 +41,10 @@ export default defineConfig({
                   link: "/posts/2026-07-01-the-great-failure",
                 },
                 { text: "About AI", link: "/posts/2026-07-02-about-ai" },
+                {
+                  text: "Solidification",
+                  link: "/posts/2026-09-02-solidification.md",
+                },
               ],
             },
           ],
@@ -70,6 +74,10 @@ export default defineConfig({
                   link: "/zh/posts/2026-07-01-the-great-failure",
                 },
                 { text: "关于人工智能", link: "/zh/posts/2026-07-02-about-ai" },
+                {
+                  text: "固化",
+                  link: "/zh/posts/2026-09-02-solidification.md",
+                },
               ],
             },
           ],
