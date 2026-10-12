@@ -1,10 +1,63 @@
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import mathjax3 from "markdown-it-mathjax3";
 import { defineConfig } from "vitepress";
+
+const DOCS_DIR = fileURLToPath(new URL("..", import.meta.url));
+
+interface Post {
+  text: string;
+  link: string;
+  ts: number;
+}
+
+/**
+ * Scan a locale's posts directory and build sidebar items sorted by
+ * date descending (newest first). Adding a new .md file to the
+ * directory is enough — no manual config edit is needed. The scan
+ * runs at dev-server start and at build time, so both local dev and
+ * CI deploys stay in sync automatically.
+ */
+function getPosts(langDir: string, urlPrefix: string): Post[] {
+  const dir = join(DOCS_DIR, langDir, "posts");
+  return readdirSync(dir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => {
+      const raw = readFileSync(join(dir, file), "utf-8");
+      const frontmatter = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? "";
+      const title =
+        frontmatter.match(/^title:\s*(.+)$/m)?.[1].trim() ??
+        file.replace(/\.md$/, "");
+      // Prefer the frontmatter `date`, fall back to the YYYY-MM-DD file prefix.
+      const ts =
+        Date.parse(frontmatter.match(/^date:\s*(.+)$/m)?.[1].trim() ?? "") ||
+        Date.parse(file.slice(0, 10)) ||
+        0;
+      return {
+        text: title,
+        link: `${urlPrefix}/posts/${file.replace(/\.md$/, "")}`,
+        ts,
+      };
+    })
+    .sort((a, b) => b.ts - a.ts || a.text.localeCompare(b.text));
+}
+
+// Languages live in sibling directories under docs/ (en/, zh/, ...).
+// `en` is the root locale: its folder is rewritten to `/` so existing
+// URLs keep working. To add a language later, drop in `docs/<lang>/`
+// and add a matching entry here.
+const enPosts = getPosts("en", "");
+const zhPosts = getPosts("zh", "/zh");
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Jack Zhu",
   description: "What I See",
+  // Serve the root locale from docs/en/ while keeping its URLs at /...
+  rewrites: {
+    "en/:path(.*)": ":path(.*)",
+  },
   markdown: {
     config: (md) => {
       md.use(mathjax3); // Latex
@@ -20,38 +73,17 @@ export default defineConfig({
     ],
   ],
   locales: {
-    // English
+    // English (root, content in docs/en/ via rewrites)
     root: {
       label: "English",
       lang: "en",
       themeConfig: {
         nav: [
-          { text: "Blog", link: "/posts/2026-06-30-first-post" },
+          { text: "Blog", link: enPosts[0]?.link ?? "/posts/" },
           { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
         ],
         sidebar: {
-          "/posts/": [
-            {
-              text: "Blog",
-              items: [
-                { text: "First Post", link: "/posts/2026-06-30-first-post" },
-                { text: "MCTS", link: "/posts/2025-12-31-mcts" },
-                {
-                  text: "The Great Failure",
-                  link: "/posts/2026-07-01-the-great-failure",
-                },
-                { text: "About AI", link: "/posts/2026-07-02-about-ai" },
-                {
-                  text: "Solidification",
-                  link: "/posts/2026-09-02-solidification",
-                },
-                {
-                  text: "From Recursion to Iteration",
-                  link: "/posts/2026-10-12-from-recursion-to-iteration",
-                },
-              ],
-            },
-          ],
+          "/posts/": [{ text: "Blog", items: enPosts }],
           "/": [],
         },
       },
@@ -63,32 +95,11 @@ export default defineConfig({
       link: "/zh/",
       themeConfig: {
         nav: [
-          { text: "文章", link: "/zh/posts/2026-06-30-first-post" },
+          { text: "文章", link: zhPosts[0]?.link ?? "/zh/posts/" },
           { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
         ],
         sidebar: {
-          "/zh/posts/": [
-            {
-              text: "文章",
-              items: [
-                { text: "第一篇文章", link: "/zh/posts/2026-06-30-first-post" },
-                { text: "蒙特卡洛树搜索", link: "/zh/posts/2025-12-31-mcts" },
-                {
-                  text: "大失败",
-                  link: "/zh/posts/2026-07-01-the-great-failure",
-                },
-                { text: "关于人工智能", link: "/zh/posts/2026-07-02-about-ai" },
-                {
-                  text: "固化",
-                  link: "/zh/posts/2026-09-02-solidification",
-                },
-                {
-                  text: "从递归到迭代",
-                  link: "/zh/posts/2026-10-12-from-recursion-to-iteration",
-                },
-              ],
-            },
-          ],
+          "/zh/posts/": [{ text: "文章", items: zhPosts }],
           "/zh/": [],
         },
       },
