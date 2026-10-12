@@ -43,7 +43,11 @@ export default defineConfig({
                 { text: "About AI", link: "/posts/2026-07-02-about-ai" },
                 {
                   text: "Solidification",
-                  link: "/posts/2026-09-02-solidification.md",
+                  link: "/posts/2026-09-02-solidification",
+                },
+                {
+                  text: "From Recursion to Iteration",
+                  link: "/posts/2026-10-12-from-recursion-to-iteration",
                 },
               ],
             },
@@ -76,7 +80,11 @@ export default defineConfig({
                 { text: "关于人工智能", link: "/zh/posts/2026-07-02-about-ai" },
                 {
                   text: "固化",
-                  link: "/zh/posts/2026-09-02-solidification.md",
+                  link: "/zh/posts/2026-09-02-solidification",
+                },
+                {
+                  text: "从递归到迭代",
+                  link: "/zh/posts/2026-10-12-from-recursion-to-iteration",
                 },
               ],
             },
