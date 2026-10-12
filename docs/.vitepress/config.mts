@@ -80,6 +80,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Blog", link: enPosts[0]?.link ?? "/posts/" },
+          { text: "Tags", link: "/tags" },
           { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
         ],
         sidebar: {
@@ -96,6 +97,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "文章", link: zhPosts[0]?.link ?? "/zh/posts/" },
+          { text: "标签", link: "/zh/tags" },
           { text: "GitHub", link: "https://github.com/ZhuJincheng-git" },
         ],
         sidebar: {
