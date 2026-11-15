@@ -1,5 +1,6 @@
 ---
-标题: 固化
+layout: doc
+title: 固化
 date: 2026-09-02
 tags:
   - 思考
