@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: From Recursion to Iteration
-date: 2026-6-30
+date: 2026-10-12
 tags:
   - Algorithm
   - Note

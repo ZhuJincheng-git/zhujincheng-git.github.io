@@ -1,7 +1,7 @@
 ---
 layout: doc
-title: From Recursion to Iteration
-date: 2026-6-30
+title: 从递归到迭代
+date: 2026-10-12
 tags:
   - 算法
   - 笔记

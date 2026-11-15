@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Explore
-      link: /posts/2026-06-30-first-post
+      link: /posts/2026-10-12-from-recursion-to-iteration
     - theme: alt
       text: GitHub
       link: https://github.com/ZhuJincheng-git/
@@ -26,7 +26,7 @@ features:
 ---
 
 <script setup>
-import QuoteRotator from './components/QuoteRotator.vue'
+import QuoteRotator from '../components/QuoteRotator.vue'
 
 const quotes = [
   "Don't rush to learn what's useful; first, identify the foolish problems waiting to be solved.",

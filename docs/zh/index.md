@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 探索
-      link: zh/posts/first-post
+      link: /zh/posts/2026-10-12-from-recursion-to-iteration
     - theme: alt
       text: GitHub
       link: https://github.com/ZhuJincheng-git/
